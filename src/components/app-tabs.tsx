@@ -1,32 +1,19 @@
-import { NativeTabs } from 'expo-router/unstable-native-tabs';
-import { useColorScheme } from 'react-native';
+import { Tabs } from 'expo-router';
+import { Text } from 'react-native';
 
-import { Colors } from '@/constants/theme';
+const tabs = [
+  { name: 'index', title: '홈', icon: '⌂' },
+  { name: 'diary', title: '일기', icon: '✎' },
+  { name: 'vocabulary', title: '단어장', icon: 'Aa' },
+  { name: 'settings', title: '설정', icon: '⚙' },
+];
 
 export default function AppTabs() {
-  const scheme = useColorScheme();
-  const colors = Colors[scheme === 'unspecified' ? 'light' : scheme];
-
   return (
-    <NativeTabs
-      backgroundColor={colors.background}
-      indicatorColor={colors.backgroundElement}
-      labelStyle={{ selected: { color: colors.text } }}>
-      <NativeTabs.Trigger name="index">
-        <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          src={require('@/assets/images/tabIcons/home.png')}
-          renderingMode="template"
-        />
-      </NativeTabs.Trigger>
-
-      <NativeTabs.Trigger name="explore">
-        <NativeTabs.Trigger.Label>Explore</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          src={require('@/assets/images/tabIcons/explore.png')}
-          renderingMode="template"
-        />
-      </NativeTabs.Trigger>
-    </NativeTabs>
+    <Tabs screenOptions={{ headerShown: false, tabBarActiveTintColor: '#326B55', tabBarInactiveTintColor: '#7B817B', tabBarStyle: { backgroundColor: '#FFFDF9', borderTopColor: '#E5E7DD' }, tabBarLabelStyle: { fontSize: 12 }, tabBarHideOnKeyboard: true }}>
+      {tabs.map(({ name, title, icon }) => (
+        <Tabs.Screen key={name} name={name} options={{ title, tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 23, fontWeight: '600' }}>{icon}</Text> }} />
+      ))}
+    </Tabs>
   );
 }

@@ -1,0 +1,9 @@
+project_id = "lingolog"
+
+[functions.correct-diary]
+# Both gateway JWT checking and explicit Auth.getUser verification are required.
+# sb_publishable keys go in apikey, never Authorization.
+verify_jwt = true
+
+[auth]
+enable_anonymous_sign_ins = true
